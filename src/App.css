@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+/* Home component styling */
+
+
+.div-home{
+    width:100%;
+    height:max-content;
+    background-color:darkcyan;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.div-flex{
+    display: grid;
+    margin-top: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+#div1{
+    width:  100%;
+    height: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#div2{
+    width:  100%;
+    height: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+#div3{
+    width: 100%;
+    height: max-content;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a:hover,a:visited,a:link,a:active{
+    text-decoration: none;
 }
+
+.based-on{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+/* Menu Component Styling */
+.navtable{
+    border-spacing: 100px 20px;
+    float: right;
+}
+
+.nav-links{
+    color: white;
+}
+
+/* Based on buttons styling */
+
+.based-on-buttons{
+    background-color: yellow;
+    width: 220px;
+    height: 30px;
+    border-radius: 10px;
+    left: 40px;
+    margin-right: 100px;
+    border-collapse: collapse;
+    border: none;
+    position: relative;
+}
+
+
+.place{
+    width: 95%;
+    height: 100px;
+    background-color: green;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+
+
