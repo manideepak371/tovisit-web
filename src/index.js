@@ -3,12 +3,41 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Routing from './Routing'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { BrowserRouter, Route, Routes,Link } from 'react-router-dom';
+import './App.css'
+import {Navbar,Container} from 'react-bootstrap'
 
-
+const Menubar=()=>{
+  return(
+      <div id='menu-nav-bar'>
+          <Navbar variant='lg' className='navbar'>
+              <Container>
+                  <div className='nav-div'>
+                  <table className='navtable'>
+                      <tr>
+                          <td><Link to='/'><span className="nav-links">Home</span></Link></td>
+                          <td><Link to='/contact'><span className="nav-links">Contact</span></Link></td>
+                          <td><Link to='/login'><span className="nav-links">Login</span></Link></td>
+                      </tr>
+                  </table>
+                  </div>
+              </Container>
+          </Navbar>        
+      </div>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routing/>
+    <div className="div-home">
+      <BrowserRouter>
+        <div className="div-flex" id="div1"><Menubar/></div>
+        <Routes>
+          <Route path='/*' element={<Routing/>}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
