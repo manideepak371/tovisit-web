@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import '../src/Styles/index.css';
 import reportWebVitals from './reportWebVitals';
-import Routing from './Routing'
+import Routing from './Routing/Routing'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes,Link } from 'react-router-dom';
-import './App.css'
+import '../src/Styles/App.css'
 import {Navbar,Container} from 'react-bootstrap'
-
+import axios from 'axios';
+import { AuthProvider } from './Context/AuthContext';
 const Menubar=()=>{
   return(
       <div id='menu-nav-bar'>
@@ -28,14 +29,34 @@ const Menubar=()=>{
   )
 }
 
+axios.interceptors.request.use(
+  request => {
+    request.headers['Content-Type']="application/json";
+    request.headers['Access-Control-Allow-Origin']="http://localhost:3000"
+    request.withCredentials=true
+    return request
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
+axios.interceptors.response.use(
+  response => {
+    return response
+  }
+)
+
 ReactDOM.render(
   <React.StrictMode>
     <div className="div-home">
       <BrowserRouter>
         <div className="div-flex" id="div1"><Menubar/></div>
-        <Routes>
-          <Route path='/*' element={<Routing/>}/>
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path='/*' element={<Routing/>}/>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   </React.StrictMode>,

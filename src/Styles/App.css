@@ -1,0 +1,294 @@
+/* Home component styling */
+
+
+.div-home{
+    width:100%;
+    background-color:darkcyan;
+}
+
+#root{
+    width: 100%;
+    height:650px;
+    background-color: darkcyan;
+}
+
+.div-grid{
+    display: grid;
+    margin-top: 20px;
+}
+
+
+#div1{
+    width:  100%;
+    height: 100px;
+}
+
+#div2{
+    width:  100%;
+    height: 100px;
+}
+
+#div3{
+    width: 100%;
+    height: max-content;
+}
+
+a:hover,a:visited,a:link,a:active{
+    text-decoration: none;
+}
+
+.based-on{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+/* Menu Component Styling */
+
+.nav-links{
+    margin-right: 100px;
+    color: white;
+}
+
+.nav-div{
+    margin-left: 70%;
+}
+
+.navbar{
+    width: 100%;
+}
+/* Based on buttons styling */
+
+.based-on-buttons{
+    background-color: yellow;
+    width: 220px;
+    height: 30px;
+    border-radius: 10px;
+    left: 40px;
+    margin-right: 100px;
+    border-collapse: collapse;
+    border: none;
+    position: relative;
+}
+
+
+.place{
+    width: 95%;
+    height: 100px;
+    background-color: rgb(67, 67, 75);
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Login screen styling */
+
+.login-container-show{
+    margin-top: 150px;
+    margin-left: 25%;
+    display: block;
+}
+
+.login-container-hide{
+    display: none;
+}
+
+.signup-container-show{
+    margin-top: 120px;
+    margin-left: 25%;
+    display: block;
+}
+
+.signup-container-hide{
+    display: none;
+}
+
+input[type="password"]{
+    width: 300px;
+    height: 50px;
+    margin-top: 20px;
+    border:3px solid gray;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.login-register-text{
+    width: 300px;
+    height: 50px;
+    margin-top: 20px;
+    border:3px solid gray;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.sign-btn{
+    background-color: transparent;
+    margin-left: 30px;
+    width:auto;
+    height: 30px;
+    background-color: rgb(93, 93, 206);
+    border-radius: 5px;
+    margin-left: 30px;
+}
+
+.alert{
+    width: auto;
+    margin-top: 50px;
+}
+
+section{
+    border: 3px #f8d7da solid;
+    width:60%;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 5px 10px;
+}
+
+
+/*place page styling*/
+
+.place-div{
+    display: grid;
+    height:250px;
+    margin-top: 20px;
+    margin-left: 20%;
+    width: 60%;
+    background-color: red;
+}
+
+.place-details{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.areas-div{
+    display: grid;
+    height:150px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 98%;
+    background-color: yellowgreen;
+}
+
+.div-scroll{
+    overflow-y: scroll;
+}
+
+.div-no-scroll{
+    overflow-y:hidden
+}
+
+.place-labels{
+    color: whitesmoke;
+    margin-left: 10px;
+}
+
+
+/* admin page styling*/
+
+.admin-div{
+    display:flex;
+    height: auto;
+    width: 99%;
+    margin:10px 10px;
+    background-color: red;
+}
+
+.admin-div{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 500px;
+}
+
+.admin-div-dropdown{
+    width:20%;
+    background-color: brown;
+    text-align: center;
+    box-shadow: 10px;
+    padding-top: 15%;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border: none;
+}
+
+.admin-div-image-show{
+    background-color:darkgoldenrod;
+    width:40%;
+    display:block;
+    border-radius: 5px;
+    border-collapse: collapse;
+    margin-left: 10px;
+    border: none;
+}
+
+.admin-div-details-show{
+    background-color: darkslategrey;
+    width:40%;
+    display:block;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border: none;
+    margin-left: 10px;
+}
+
+
+.admin-div-image-hide .admin-div-details-hide{
+    display:none
+}
+
+.new-place-hide{
+    display: none;
+}
+
+.new-place-show{
+    display: block;
+}
+
+.existing-place-hide{
+    display: none;
+}
+
+.existing-place-show{
+    display: block;
+}
+
+.new-existing-radio{
+    margin-left: 25px;
+}
+
+.place-attributes{
+    color:cadetblue;
+    margin-left: 10px;
+    display: inline-block;
+    text-align: right;
+    width:100px
+    
+}
+
+.place-value-text{
+    width: 60%;
+    margin-top: 10px;
+    border: solid 2px gray;
+    border-radius: 5px;
+}
+
+.place-wrng-msg{
+    color: red;
+    margin-left: 10px;
+}
+
+.admin-div-new-place-image{
+    margin-left: 15px;
+    width: 50%;
+    background-color: chocolate;
+}
+
+.admin-div-new-place-details{
+    margin-left: 15px;
+    width: 50%;
+    background-color:darkolivegreen;
+}

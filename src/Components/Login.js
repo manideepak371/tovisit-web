@@ -1,8 +1,35 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Alert } from 'react-bootstrap'
 import {Navigate, Outlet, useLocation, useNavigate} from 'react-router-dom'
-import {axios} from 'axios'
+import axios from 'axios'
 import Admin from "./Admin";
+
+ async function AuthUser(email,password){
+     console.log(email,password)
+    var userCred={
+        email:email,
+        password:password
+    }
+    const response=await axios.post('http://localhost:9000/admin/login',userCred)
+    const responseText=await response.data
+    return responseText
+}
+
+function getCookie(key){
+    if(document.cookie != 'undefined' && document.cookie.length > 0){
+        let str=document.cookie
+        let a=str.split('=')
+        for(var i=0;i<a.length;i++){
+            if(a[i] == key){
+                return a[i+1]
+                break
+            }
+        }
+    }
+    else{
+        return ""
+    }
+}
 
 const Login=()=> {
     const [email,setEmail]=useState('')
@@ -25,7 +52,7 @@ const Login=()=> {
     
 
     const navigate=useNavigate()
-    const ValidateLoginInputs = () => {
+    async function ValidateLoginInputs(){
         if (email.length <= 0) {
             setError(true)
             setErrorMessage("Email should be entered")
@@ -39,11 +66,22 @@ const Login=()=> {
         if(email.length > 0 && password.length > 0){
             setError(false)
             setErrorMessage("")
-            navigate("/admin", { replace: true });
+            const response=await AuthUser(email,password).then(response => {return response})
+            if(response.success){
+                sessionStorage.setItem("loggedIn",response.success)
+                // sessionStorage.setItem("accessToken",getCookie("authToken"))
+                sessionStorage.setItem("loginMsg",response.message)
+                // (document.cookie != 'undefined' && document.cookie.length >sessionStorage.setItem("accessToken",document.cookie)
+                navigate('/admin',{replace:true})
+            }
+            else{
+                setError(true)
+                setErrorMessage(response)
+            }
         }
     }
 
-    const ValidateSignupInputs = () => {
+    async function ValidateSignupInputs(){
         if (email.length <= 0) {
             setError(true)
             setErrorMessage("Email should be entered")
@@ -77,6 +115,14 @@ const Login=()=> {
             loginemailref.current.value=""
             loginpwdref.current.value=""
             cnfref.current.value=""
+            const response=await AuthUser(email,password).then(response => {return response})
+            if(response == "user added"){
+                navigate("/login",{replace:true})
+            }
+            else{
+                setError(true)
+                setErrorMessage(response)
+            }
             // navigate("/admin", { replace: true });
         }
     }
@@ -113,11 +159,17 @@ const Login=()=> {
         cnfref.current.value=""
     }
 
+    if(sessionStorage.length > 0 && sessionStorage.getItem("loggedIn") != null && sessionStorage.getItem("loggedIn")){
+        return (
+            <Navigate to="/admin" replace={true} />
+        )
+    }
+
     return (
         <>
             <div className={LoginContainer}>
                 <section>
-                    <p><input type="text" ref={loginemailref} placeholder="Enter Email Id" onChange={(event)=>{setEmail(event.target.value)}}/></p>
+                    <p><input type="text" ref={loginemailref} className="login-register-text" placeholder="Enter Email Id" onChange={(event)=>{setEmail(event.target.value)}}/></p>
                     <p><input type="password" ref={loginpwdref} placeholder="Enter Password" onChange={(event)=>{setPassword(event.target.value)}}/></p>
                     <p>
                         <button className="sign-btn" id="signin-btn" onClick={()=>{ValidateLoginInputs()}}>Login</button>
@@ -128,7 +180,7 @@ const Login=()=> {
             </div>
             <div className={SignupContainer}>
                 <section>
-                    <p><input type="text" ref={signupemailref} placeholder="Enter Email Id" onChange={(event)=>{setEmail(event.target.value)}}/></p>
+                    <p><input type="text" ref={signupemailref} placeholder="Enter Email Id" className="login-register-text" onChange={(event)=>{setEmail(event.target.value)}}/></p>
                     <p><input type="password" ref={signuppwdref} placeholder="Enter Password" onChange={(event)=>{setPassword(event.target.value)}}/></p>
                     <p><input type="password" ref={cnfref} placeholder="Confirm password" onChange={(event)=>{setCNFPassword(event.target.value)}}/></p>
                     <p>
