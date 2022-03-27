@@ -18,7 +18,7 @@ function Routing(){
                 <Route path='/' element={<Home/>}></Route>
                 <Route path='login' element={<Login/>}></Route>
                 <Route path='contact' element={<Contact/>}></Route>
-                <Route path='place' element={<Place/>}></Route>
+                <Route path='place/:place_name' element={<Place/>}></Route>
                 <Route element={<AuthenticateAdmin/>}>
     
                 </Route>
