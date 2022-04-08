@@ -1,23 +1,25 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {Navigate, Outlet, useLocation,Route,useNavigate} from 'react-router-dom'
 import '../Styles/App.css'
-
-const data=[
-  {id:1,placename:"Shimla"},
-  {id:2,placename:"Tirumala"},
-  {id:3,placename:"Ooty"}
-]
-
-
+import axios from 'axios'
 
 const Home =()=>{
   const location=useLocation()
   const navigate=useNavigate()
+  const [places,setPlaces]=useState([])
 
   const showPlace=(place_name)=>{
     navigate(`/place/${place_name}`,{replace:true})
   }
 
+  const GetPlaces=async ()=>{
+    const response=await axios.get("http://localhost:9000/")
+    const responseData=await response.data
+    setPlaces(responseData.data)
+  }
+  useEffect(()=>{
+    GetPlaces()
+  },[])
   return(
     <>
       <div className="div-grid" id="div2">
@@ -30,11 +32,14 @@ const Home =()=>{
       </div>
       <div className='div-grid' id="div3">
         <div className='div-places'>
-          {data.map(d => (
-            <div className='place' id={`place${d.id}`} onClick={()=>{showPlace(d.placename)}}>
-              {d.id}
-            </div>
-          ))}
+          {places.length > 0  ? 
+            places.map((place,index) => (
+              <div className='place' id={`place${index}`} onClick={()=>{showPlace(place.placename)}}>
+                {place.placename}
+              </div>
+            ))
+            :"No data available."
+          }
         </div>
       </div>
       <Outlet/>
