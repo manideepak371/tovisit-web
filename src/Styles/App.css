@@ -192,7 +192,8 @@ section{
 /* admin page styling*/
 
 .admin-div{
-    display:flex;
+    display:grid;
+    margin-top: 25px;
     height: auto;
     width: 99%;
     margin:10px 10px;
@@ -206,25 +207,31 @@ section{
 }
 
 .admin-div-dropdown{
-    width:20%;
+    width:100%;
     background-color: brown;
-    text-align: center;
     box-shadow: 10px;
-    padding-top: 15%;
+    margin-top: 10px;
     border-radius: 5px;
     border-collapse: collapse;
     border: none;
 }
 
 .admin-dropdown{
-    margin-left: 5px;
+    text-align: right;
+    margin-left: 10px;
     border-radius: 5px;
-    width:60%
+    width:60%;
+}
+
+.places-areas-dropdown{
+    float: right;
+    width: 30%;
+    border-radius: 5px;
+    margin-right: 15px;
 }
 
 .admin-div-image-show{
-    background-color:darkgoldenrod;
-    width:40%;
+    width:99%;
     display:block;
     border-radius: 5px;
     border-collapse: collapse;
@@ -234,12 +241,12 @@ section{
 
 .admin-div-details-show{
     background-color: darkslategrey;
-    width:40%;
+    width:99%;
     display:block;
     border-radius: 5px;
     border-collapse: collapse;
     border: none;
-    margin-left: 10px;
+    margin-top: 20px;
 }
 
 
@@ -275,16 +282,18 @@ section{
     color:cadetblue;
     margin-left: 10px;
     display: inline-block;
+    width:100px;
+    margin-top: 10px;
     text-align: right;
-    width:100px
-    
 }
 
 .place-value-text{
     width: 60%;
-    margin-top: 10px;
     border: solid 2px gray;
     border-radius: 5px;
+    margin-top: 10px;   
+    margin-left: 5px;
+    text-align: right;
 }
 
 .place-wrng-msg{
@@ -328,3 +337,10 @@ input[type="file"]{
     display: block;
 }
 
+.select-options{
+    background-color: darksalmon;
+}
+
+.admin-save-delete-btn{
+    text-align: center;
+}

@@ -23,5 +23,5 @@ function Place(){
         </div>
     )
 }
-
+    
 export default Place
