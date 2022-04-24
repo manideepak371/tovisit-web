@@ -455,32 +455,32 @@ const PlaceDetails=(data)=>{
             formData.append('imagekey',details[0].images[0].key)
         }
         const response=await axios.post('http://localhost:9000/admin/updatePlace',formData)
-        const responseData=await response.data
-        if(responseData.success){
-            const imageresponse=await axios.post('http://localhost:9000/admin/uploadUpdatedImage',formData)
-            const imageresponseData=await imageresponse.data
-            if(imageresponseData.success){
-                setSuccess(true)
-                setSuccessMsg(imageresponseData.message)
-                setError(false)
-                setErrorMsg("")
-                setReload(true)
-            }
-            if(!imageresponseData.success){
-                setSuccess(false)
-                setSuccessMsg("")
-                setError(true)
-                setErrorMsg(imageresponseData.message)
-                setReload(false)
-            }
-        }
-        if(!responseData.success){
-            setSuccess(false)
-            setSuccessMsg("")
-            setError(true)
-            setErrorMsg(imageresponseData.message)
-            setReload(false)
-        }
+        // const responseData=await response.data
+        // if(responseData.success){
+        //     const imageresponse=await axios.post('http://localhost:9000/admin/uploadUpdatedImage',formData)
+        //     const imageresponseData=await imageresponse.data
+        //     if(imageresponseData.success){
+        //         setSuccess(true)
+        //         setSuccessMsg(imageresponseData.message)
+        //         setError(false)
+        //         setErrorMsg("")
+        //         setReload(true)
+        //     }
+        //     if(!imageresponseData.success){
+        //         setSuccess(false)
+        //         setSuccessMsg("")
+        //         setError(true)
+        //         setErrorMsg(imageresponseData.message)
+        //         setReload(false)
+        //     }
+        // }
+        // if(!responseData.success){
+        //     setSuccess(false)
+        //     setSuccessMsg("")
+        //     setError(true)
+        //     setErrorMsg(imageresponseData.message)
+        //     setReload(false)
+        // }
     }
 
     const TextAreaDisplayed=()=>{
