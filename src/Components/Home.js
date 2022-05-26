@@ -32,7 +32,7 @@ const Home =()=>{
       </div>
       <div className='div-grid' id="div3">
         <div className='div-places'>
-          {places.length > 0  ? 
+          {places?.length > 0  ? 
             places.map((place,index) => (
               <div className='place' id={`place${index}`} onClick={()=>{showPlace(place.placename)}}>
                 {place.placename}

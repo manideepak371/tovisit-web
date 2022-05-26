@@ -1,10 +1,10 @@
-1. Image select, view and upload
-2. Get image and display
-3. delete place
-4. delete images
-5. add place, with details & images
-6. update place, with details & images
-7. Replace session storage with cookkies
+1. Image select, view and upload - done
+2. Get image and display - done
+3. delete place - done
+4. delete images - partial (not in s3 bucket)
+5. add place, with details & images - done
+6. update place, with details & images - done
+7. Replace session storage with cookies
 8. Restructure and optimize the code
 9. Replace Context with Redux -- optional
 10. Use Jest to test
