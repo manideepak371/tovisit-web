@@ -4,6 +4,8 @@ import { useEffect,useState,useRef } from "react"
 import { Alert } from "react-bootstrap"
 import '../Styles/App.css'
 
+const DB_URL=process.env.REACT_APP_DB_URL
+
 var changearr={}
 
 const DetailsChange=(details,startmonth,endmonth,season,updatedImage)=>{
@@ -23,13 +25,6 @@ const DetailsChange=(details,startmonth,endmonth,season,updatedImage)=>{
     return {}
 }
 
-const DeletePlace=async (place)=>{
-    const details={placename:place}
-    const response=await axios.post('http://localhost:9000/admin/deletePlace',details)
-    const responseData=await response.data
-    console.log(responseData)
-    return {success:responseData.success,message:responseData.message}
-}
 
 const Months=[
     {month:"January"},
@@ -86,7 +81,7 @@ const ExistingPlaceDetails=()=>{
 
 
     const getPlaces=async ()=>{
-        const response=await axios.get('http://localhost:9000/admin/getplaces')
+        const response=await axios.get(DB_URL+'getplaces')
         const responseData=await response.data
         if(responseData.length > 0){
             var temp1=[]
@@ -109,7 +104,7 @@ const ExistingPlaceDetails=()=>{
     
     const getDetails=async ()=>{
         var selectedPlace={placename:place}
-        const response=await axios.post('http://localhost:9000/admin/getdetails',selectedPlace)
+        const response=await axios.post(DB_URL+'getdetails',selectedPlace)
         const responseData=await response.data
         if(responseData.length > 0){
             setDetails(responseData)
@@ -219,7 +214,7 @@ const PlaceDetails=(data)=>{
             formData.append('imagekey',details[0].images[0].key)
         }
         console.log(updateddetails,updatedImage)
-        const response=await axios.post('http://localhost:9000/admin/updatePlace',formData)
+        const response=await axios.post(DB_URL+'admin/updatePlace',formData)
         const responseData=await response.data
         console.log(responseData)
         if(responseData.success){
@@ -270,27 +265,6 @@ const PlaceDetails=(data)=>{
         }
     }
 
-    const Delete=async ()=>{
-        const response=await DeletePlace(details[0].placename)
-        console.log(response)
-        if(response.success){
-            setError(false)
-            setErrorMsg('')
-            setSuccess(true)
-            setSuccessMsg(response.message)
-            setTimeout(()=>{
-                setReload(true)
-            },1000)
-        }
-        if(!response.success){
-            setError(false)
-            setErrorMsg(response.message)
-            setSuccess(true)
-            setSuccessMsg()
-            setReload(false)
-        }
-    }
-
     return (
         <div>
             <p><label className="place-attributes">Place Name :</label> <input type="text" className="place-value-text" name="placename" defaultValue={details[0]?.placename} readOnly/></p>
@@ -332,7 +306,7 @@ const PlaceDetails=(data)=>{
             <div className="admin-save-delete-btn">
                 <p>
                     <button className="sign-btn" id="save-btn" onClick={()=>{ChangedDetails()}}>Save</button>
-                    <button className="sign-btn" id="delete-btn" onClick={()=>{Delete()}}>Delete Place</button>
+                    <button className="sign-btn" id="delete-btn" disabled>Delete Place</button>
                 </p>
             </div>
             {reload && <Navigate to='/login' replace={true} />}

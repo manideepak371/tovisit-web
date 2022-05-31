@@ -7,7 +7,7 @@ import ExistingPlaceDetails from "./ExistingPlace"
 import NewPlaceDetails from "./NewPlace"
 
 
-function Admin(){
+function AddUpdate(){
     const navigate=useNavigate()
 
     const [newExisting,setNewExisting]=useState(false)
@@ -54,6 +54,6 @@ function Admin(){
     }
 }
 
-export default Admin
+export default AddUpdate
 
 

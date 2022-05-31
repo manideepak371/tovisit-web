@@ -14,7 +14,7 @@
 
 .div-grid{
     display: grid;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 
@@ -37,7 +37,7 @@ a:hover,a:visited,a:link,a:active{
     text-decoration: none;
 }
 
-.based-on{
+.based-on,.add-update{
     width: 100%;
     justify-content: center;
     text-align: center;
@@ -61,7 +61,7 @@ a:hover,a:visited,a:link,a:active{
 }
 /* Based on buttons styling */
 
-.based-on-buttons{
+.based-on-buttons,.add-update-btn{
     background-color: yellow;
     width: 220px;
     height: 30px;
@@ -81,56 +81,6 @@ a:hover,a:visited,a:link,a:active{
     margin-top: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
-}
-
-/* Login screen styling */
-
-.login-container-show{
-    margin-top: 150px;
-    margin-left: 25%;
-    display: block;
-}
-
-.login-container-hide{
-    display: none;
-}
-
-.signup-container-show{
-    margin-top: 120px;
-    margin-left: 25%;
-    display: block;
-}
-
-.signup-container-hide{
-    display: none;
-}
-
-input[type="password"]{
-    width: 300px;
-    height: 50px;
-    margin-top: 20px;
-    border:3px solid gray;
-    border-radius: 10px;
-    margin-left: 30px;
-}
-
-.login-register-text{
-    width: 300px;
-    height: 50px;
-    margin-top: 20px;
-    border:3px solid gray;
-    border-radius: 10px;
-    margin-left: 30px;
-}
-
-.sign-btn{
-    background-color: transparent;
-    margin-left: 30px;
-    width:auto;
-    height: 30px;
-    background-color: rgb(93, 93, 206);
-    border-radius: 5px;
-    margin-left: 30px;
 }
 
 .alert{
@@ -343,4 +293,23 @@ input[type="file"]{
 
 .admin-save-delete-btn{
     text-align: center;
+}
+
+.no-data-div{
+    padding-top: 5%;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+}
+
+.sign-btn{
+    background-color:darkcyan;
+    border-collapse: collapse;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    height: max-content;
+    font-size:larger;
+    font-weight: 450;
+    margin-left: 25px;
 }

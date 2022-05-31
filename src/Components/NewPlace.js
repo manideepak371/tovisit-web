@@ -5,6 +5,8 @@ import { Navigate } from 'react-router-dom'
 import '../Styles/App.css'
 
 
+const DB_URL=process.env.REACT_APP_DB_URL
+
 const Months=[
     {month:"January"},
     {month:"Feb"},
@@ -91,12 +93,12 @@ const NewPlaceDetails=()=>{
             formData.append('parentplace',details.parentplace)
         }
         formData.append('images',imageref.current.files[0])
-        const response=await axios.post("http://localhost:9000/admin/addPlace",formData,{headers:{
+        const response=await axios.post(DB_URL+"admin/addPlace",formData,{headers:{
             'Content-Type':'application/x-www-form-urlencoded'
         }})
         const responseData=await response.data
-        if(responseData.success){
-            const imageresponse=await axios.post("http://localhost:9000/admin/uploadImage",formData,{headers:{
+        if(responseData.success){   
+            const imageresponse=await axios.post(DB_URL+"admin/uploadImage",formData,{headers:{
                 'Content-Type':'application/x-www-form-urlencoded'
             }})
             const imageresponseData=await imageresponse.data
@@ -129,7 +131,7 @@ const NewPlaceDetails=()=>{
     }
 
     const getPlaces=async ()=>{
-        const response=await axios.get('http://localhost:9000/admin/getplaces')
+        const response=await axios.get(DB_URL+'getplaces')
         const responseData=await response.data
         if(responseData.length > 0){
             var temp=[]

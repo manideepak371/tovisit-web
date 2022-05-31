@@ -8,7 +8,6 @@ import { BrowserRouter, Route, Routes,Link } from 'react-router-dom';
 import '../src/Styles/App.css'
 import {Navbar,Container} from 'react-bootstrap'
 import axios from 'axios';
-import { AuthProvider } from './Context/AuthContext';
 const Menubar=()=>{
   return(
       <div id='menu-nav-bar'>
@@ -52,11 +51,9 @@ ReactDOM.render(
     <div className="div-home">
       <BrowserRouter>
         <div className="div-flex" id="div1"><Menubar/></div>
-        <AuthProvider>
-          <Routes>
-            <Route path='/*' element={<Routing/>}/>
-          </Routes>
-        </AuthProvider>
+        <Routes>
+          <Route path='/*' element={<Routing/>}/>
+        </Routes>
       </BrowserRouter>
     </div>
   </React.StrictMode>,

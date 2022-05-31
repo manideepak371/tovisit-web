@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import {Navigate, Outlet, useLocation,Route,useNavigate} from 'react-router-dom'
 import '../Styles/App.css'
 import axios from 'axios'
+import AddUpdate from './AddUpdate'
 
 const Home =()=>{
   const location=useLocation()
@@ -20,9 +21,18 @@ const Home =()=>{
   useEffect(()=>{
     GetPlaces()
   },[])
+
+  const showAddUpdate=()=>{
+    navigate('addupdate',{replace:true})
+  }
+
   return(
     <>
       <div className="div-grid" id="div2">
+        <p><div className='add-update'>
+            <button className='add-update-btn' onClick={()=>{showAddUpdate()}}>Add/Update Place</button>
+          </div>
+        </p>
         <div className="based-on">
             <button className="based-on-buttons" >Now</button>
             <button className="based-on-buttons">City</button>
@@ -38,7 +48,7 @@ const Home =()=>{
                 {place.placename}
               </div>
             ))
-            :"No data available."
+            :<div className='no-data-div'>No data available.</div>
           }
         </div>
       </div>
