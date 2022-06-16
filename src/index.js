@@ -14,13 +14,12 @@ const Menubar=()=>{
           <Navbar variant='lg' className='navbar'>
               <Container>
                   <div className='nav-div'>
-                  <table className='navtable'>
-                      <tr>
-                          <td><Link to='/'><span className="nav-links">Home</span></Link></td>
-                          <td><Link to='/contact'><span className="nav-links">Contact</span></Link></td>
-                          <td><Link to='/login'><span className="nav-links">Login</span></Link></td>
-                      </tr>
-                  </table>
+                    <table className='navtable'>
+                        <tr>
+                            <td><Link to='/'><span className="nav-links">Home</span></Link></td>
+                            <td><Link to='/about'><span className="nav-links">About</span></Link></td>
+                        </tr>
+                    </table>
                   </div>
               </Container>
           </Navbar>        

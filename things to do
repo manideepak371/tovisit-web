@@ -4,7 +4,6 @@
 4. delete images - partial (not in s3 bucket)
 5. add place, with details & images - done
 6. update place, with details & images - done
-7. Replace session storage with cookies
+7. Modify UI alignments and add appealing colors
 8. Restructure and optimize the code
-9. Replace Context with Redux -- optional
-10. Use Jest to test
+9. Use Jest to test

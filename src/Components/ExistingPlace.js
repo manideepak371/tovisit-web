@@ -309,7 +309,7 @@ const PlaceDetails=(data)=>{
                     <button className="sign-btn" id="delete-btn" disabled>Delete Place</button>
                 </p>
             </div>
-            {reload && <Navigate to='/login' replace={true} />}
+            {reload && <Navigate to='/addupdate' replace={true} />}
         </div>
     )
 }

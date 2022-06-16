@@ -49,19 +49,19 @@ const NewPlaceDetails=()=>{
     const [reload,setReload] = useState(false)
 
     const CollectedDetails=()=>{
-        if(placename.length < 3  || startmonth == "Select" || endmonth == "Select" || season == "Select" || startmonth == "" || endmonth == "" || season == ""){
+        if(placename.length < 3  || (isareaorplace && startmonth === "Select") || (isareaorplace && endmonth === "Select") || (isareaorplace && season === "Select") || (isareaorplace && startmonth === "") || (isareaorplace && endmonth === "") || (isareaorplace && season === "")){
             setError(true)
             setErrMsg("Please enter required details (*)")
             return
         }
-        if(imageref.current.files.length == 0 && imageref.current.value == ""){
-            setError(true)
-            setErrMsg("Please provide any one image related to this Place / Area")
-            return
-        }
-        if((!isareaorplace && parentplace == "") || (!isareaorplace && parentplace == parentplace == "Select") ){
+        if((!isareaorplace && parentplace === "") || (!isareaorplace && parentplace === "Select") ){
             setError(true)
             setErrMsg("Please enter the place/city name in which this area exists")
+            return
+        }
+        if(imageref.current.files.length === 0 && imageref.current.value === ""){
+            setError(true)
+            setErrMsg("Please provide any one image related to this Place / Area")
             return
         } 
         else{
@@ -83,13 +83,18 @@ const NewPlaceDetails=()=>{
 
     const uploadNewPlace=async()=>{
         var formData=new FormData()
-        formData.append('placename',details.placename)
-        formData.append('startmonth',details.startmonth)
-        formData.append('endmonth',details.endmonth)
-        formData.append('season',details.season)
-        formData.append('isArea',details.isArea)
-        formData.append('isPlace',details.isPlace)
-        if(details.parentplace){
+        if(details.isPlace){
+            formData.append('placename',details.placename)
+            formData.append('startmonth',details.startmonth)
+            formData.append('endmonth',details.endmonth)
+            formData.append('season',details.season)
+            formData.append('isArea',details.isArea)
+            formData.append('isPlace',details.isPlace)
+        }
+        if(details.isArea){
+            formData.append('placename',details.placename)
+            formData.append('isArea',details.isArea)
+            formData.append('isPlace',details.isPlace)
             formData.append('parentplace',details.parentplace)
         }
         formData.append('images',imageref.current.files[0])
@@ -161,8 +166,12 @@ const NewPlaceDetails=()=>{
                         <span> 
                             <label className="place-attributes">Is Place ?</label> <input type="radio" ref={isplaceref} className="place-value-radio" name="placeORarea" defaultChecked={isareaorplace} onChange={(event)=>{setAreaorPlace(true)}}/>
                             <label className="place-attributes">Is Area ?</label> <input type="radio" ref={isarearef} className="place-value-radio" name="placeORarea" defaultChecked={!isareaorplace} onChange={(event)=>{setAreaorPlace(false)}}/>
-                            {!isareaorplace &&
-                                <p>
+                        </span>
+                    </p>
+                    {!isareaorplace ?
+                        <>
+                            <p>
+                                <span>
                                     <label className="place-attributes">Parent Place<label style={{color:"red"}}>*</label> :</label> 
                                     <select className="admin-dropdown" onChange={(event)=>{setParentplace(event.target.value)}}>
                                         <option className="select-options">Select</option>
@@ -172,46 +181,50 @@ const NewPlaceDetails=()=>{
                                             ))
                                         }
                                     </select>
-                                    <p style={{color:"red",height:"10px",marginLeft:"10px"}}>If parent place /city not displayed in the drop down, then add that parent place before adding areas</p>
-                                </p>
-                            }
-                        </span>
-                    </p>
-                    <p>
-                        <span><label className="place-attributes">Start Month<label style={{color:"red"}}>*</label> :</label> 
-                            <select className="admin-dropdown" onChange={(event)=>{setStartmonth(event.target.value)}}>
-                                <option className="select-options">Select</option>
-                                {Months.map((m)=>(
-                                    <option className="select-options">{m.month}</option>
-                                ))}
-                            </select>
-                        </span>
-                    </p>
-                    <p>
-                        <span><label className="place-attributes">End Month<label style={{color:"red"}}>*</label> :</label> 
-                            <select className="admin-dropdown" onChange={(event)=>{setEndmonth(event.target.value)}}>
-                                <option className="select-options">Select</option>
-                                {Months.map((m)=>(
-                                    <option className="select-options">{m.month}</option>
-                                ))}
-                            </select>    
-                        </span>
-                    </p>
-                    <p>
-                        <span><label className="place-attributes">Season<label style={{color:"red"}}>*</label> :</label>
-                            <select className="admin-dropdown" onChange={(event)=>{setSeason(event.target.value)}}>
-                                <option className="select-options">Select</option>
-                                {Seasons.map((s)=>(
-                                    <option className="select-options">{s.season}</option>
-                                ))}
-                            </select>
-                        </span> 
-                    </p>
+                                </span>
+                                <p style={{color:"red",height:"10px",marginLeft:"10px"}}>If parent place /city not displayed in the drop down, then add that parent place before adding areas</p>
+                            </p>
+                        </> :
+                        <>
+                            <p>
+                                <span><label className="place-attributes">Start Month<label style={{color:"red"}}>*</label> :</label> 
+                                    <select className="admin-dropdown" onChange={(event)=>{setStartmonth(event.target.value)}}>
+                                        <option className="select-options">Select</option>
+                                        {Months.map((m)=>(
+                                            <option className="select-options">{m.month}</option>
+                                        ))}
+                                    </select>
+                                </span>
+                            </p>
+                            <p>
+                                <span><label className="place-attributes">End Month<label style={{color:"red"}}>*</label> :</label> 
+                                    <select className="admin-dropdown" onChange={(event)=>{setEndmonth(event.target.value)}}>
+                                        <option className="select-options">Select</option>
+                                        {Months.map((m)=>(
+                                            <option className="select-options">{m.month}</option>
+                                        ))}
+                                    </select>    
+                                </span>
+                            </p>
+                            <p>
+                                <span><label className="place-attributes">Season<label style={{color:"red"}}>*</label> :</label>
+                                    <select className="admin-dropdown" onChange={(event)=>{setSeason(event.target.value)}}>
+                                        <option className="select-options">Select</option>
+                                        {Seasons.map((s)=>(
+                                            <option className="select-options">{s.season}</option>
+                                        ))}
+                                    </select>
+                                </span> 
+                            </p>
+                        </>
+                    }
                     <p><label className="place-attributes">Select images to upload<label style={{color:"red"}}>*</label> :</label><input type="file" name="placeImage" ref={imageref} accept="image/*,.jpeg,.png"/></p>
                     <p>{error && <Alert variant="danger"  dismissible={true} onClose={()=>{setError(false)}}>{errorMessage}</Alert>}</p>
                     <p>{success && <Alert variant="success"  dismissible={true} onClose={()=>{setSuccess(false)}}>{successMsg}</Alert>}</p>
-                    <p><button className="sign-btn" id="save-btn" onClick={()=>{CollectedDetails()}}>Save</button></p>
-                    {reload && <Navigate to="/login" replace={true}/>}
+                    <div className='new-place-save-btn'>
+                        <p><button className="sign-btn" id="save-btn" onClick={()=>{CollectedDetails()}}>Save</button></p>
+                    </div>
+                    {reload && <Navigate to="/" replace={true}/>}
                 </div>
             </div>
         </>
