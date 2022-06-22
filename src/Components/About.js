@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
 const About=()=>{
-
     return(
         <>
             <div className="about-div">
@@ -11,15 +10,6 @@ const About=()=>{
                     Here place can be a city or a tourism hot spot. And area can be a Restraunt, Mall, Park, Food stall, Temple, Theater etc.,
                 </label>
             </div>
-            <table className="test">
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                </tbody>
-            </table>
         </>
     )
 }

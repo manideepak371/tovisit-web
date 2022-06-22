@@ -182,7 +182,7 @@ const NewPlaceDetails=()=>{
                                         }
                                     </select>
                                 </span>
-                                <p style={{color:"red",height:"10px",marginLeft:"10px"}}>If parent place /city not displayed in the drop down, then add that parent place before adding areas</p>
+                                <p style={{color:"rgb(220, 180, 150)",height:"10px",marginLeft:"10px"}}>If parent place /city not displayed in the drop down, then add that parent place before adding areas</p>
                             </p>
                         </> :
                         <>

@@ -6,6 +6,7 @@ import Carousel from 'react-multi-carousel'
 
 const DB_URL=process.env.REACT_APP_DB_URL
 
+
 function Place(){
     const navigate=useNavigate()
     const [data,setData]=useState([])
@@ -13,7 +14,7 @@ function Place(){
     const params=useParams()
     const [placeDetails,setDetails]=useState({})
     const [slide,setSlide]=useState(0)
-
+    const place_name=params?.place_name.replace('%20',' ')
     const d=[
         {id:0},
         {id:1},
@@ -28,80 +29,69 @@ function Place(){
     ]
 
     useEffect(()=>{
-        if(params?.place_name){
+        if(place_name){
             getDetails()
         }
-    })
+    },[])
 
-    const slideShow=(i)=>{
-        switch(i){
-            case 1:
-                if(slide === d.length-1){
-                    break
-                }
-                else{
-                    setSlide(slide+1)
-                    break
-                }
-            case -1:
-                console.log(i)
-                if(slide === 0){
-                    return
-                }
-                else{
-                    setSlide(slide-1)
-                    break
-                }
-            default: break
+
+    const getDetails=async ()=>{
+        const response=await axios.post(DB_URL+'getdetails',{placename:place_name})
+        const responseData=await response.data
+        if(responseData){
+            setData(responseData)
+            console.log(responseData)
         }
     }
 
-    const getDetails=async ()=>{
-        const response=await axios.get(DB_URL+'getDetails',{placename:params.place_name})
-        const responseData=await response.data
-        if(responseData){
-            console.log(responseData)
-            setData(responseData)
-        }
+    const showPlace=(place_name)=>{
+        navigate(`/place/${place_name}`,{replace:true})
+        return
     }
 
     return (
         <div className={placeDiv}>
             <div className="place-div">
-                <div className='place-div-flex'>
-                    <div style={{width:"100%"}}>
-                        <img className='place-img' src='https://www.google.com/logos/doodles/2022/celebrating-satyendra-nath-bose-6753651837109430-l.webp' className='place-img' alt='Place Image'/>
-                    </div>
-                </div>
                 <div className="place-div-flex">
-                    <div className='place-details'>
-                        <p>
-                            <label className="place-label-keys">Place Name: </label>
-                            <label className="place-label-values">{params.place_name}</label>
-                        </p>
-                        <p>
-                            <label className="place-label-keys">Best to visit in Season: </label> 
-                            <label className="place-label-values">{params.place_name}</label>
-                        </p>
-                        <p>
-                            <label className="place-label-keys">Months: </label> 
-                            <label className="place-label-values">{params.place_name}</label> 
-                        </p>
+                    {
+                        data?.length > 0 &&
+                        <div className='place-details'>
+                            <p>
+                                <label className="place-label-keys">Place Name: </label>
+                                <label className="place-label-values">{data[0].placename}</label>
+                            </p>
+                            <p>
+                                <label className="place-label-keys">Best Season to visit in: </label> 
+                                <label className="place-label-values">{data[0].season}</label>
+                            </p>
+                            <p>
+                                <label className="place-label-keys">Best Months: </label> 
+                                <label className="place-label-values">{data[0].startmonth} - {data[0].endmonth}</label> 
+                            </p>
+                        </div>
+                    }
+                </div>
+                <div className='place-div-flex'>
+                    <div className="image-styles">
+                        <img className='place-img' style={{width:"100%",height:"500px",borderRadius:"25PX"}} src={data[0]?.images[0]?.imagelink} className='place-img' alt='Place Image'/>
                     </div>
                 </div>
             </div>
-            <div className="place-div">
-                {/* <div className='areas-div'>                
-                    <button className="slide-btn left" onClick={()=>{slideShow(-1)}}> Left </button>
-                    {
-                        d.map((area,index)=>(
-                            <div className="area-div" id={`area-div-${index}`}>
-                                {d[index].id}
-                            </div>
-                        ))
-                    }
-                    <button className="slide-btn right" onClick={()=>{slideShow(1)}}> Right </button>
-                </div> */}
+            <div className="div-grid">
+                {
+                    data[0]?.areas?.length > 0 ?
+                    <>
+                        <label className='place-label-keys'>Areas to visit in this place:</label>
+                        <div className='div-places'>
+                            {
+                                data[0].areas.map((area)=>(
+                                    <div className='based-on-divs'><label className='home-place-div' onClick={()=>{}}>{area.placename}</label></div>
+                                ))
+                            }
+                        </div>
+                    </> :
+                      <label className='based-labels-no-data'>No areas available on this place</label>
+                }
             </div>
         </div>
     )

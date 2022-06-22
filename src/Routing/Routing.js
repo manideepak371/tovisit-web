@@ -1,4 +1,4 @@
-import {Routes,Route, BrowserRouter as Router,Link, BrowserRouter} from 'react-router-dom'
+import {Routes,Route, BrowserRouter as Router,Link, withRouter} from 'react-router-dom'
 import Home from '../Components/Home'
 import Place from '../Components/Place'
 import '../Styles/App.css'
