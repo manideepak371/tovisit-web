@@ -4,7 +4,6 @@ import '../Styles/App.css'
 import axios from 'axios'
 import Carousel from 'react-multi-carousel'
 
-const URL=process.env.REACT_APP_NODE_SERVER_URL
 
 
 function Place(){
@@ -36,7 +35,7 @@ function Place(){
 
 
     const getDetails=async ()=>{
-        const response=await axios.post(URL+'tovisit/getdetails',{placename:place_name})
+        const response=await axios.post('https://tovisit-india-node-server.herokuapp.com/tovisit/getdetails',{placename:place_name})
         const responseData=await response.data
         if(responseData){
             setData(responseData)

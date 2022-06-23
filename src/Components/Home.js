@@ -5,8 +5,6 @@ import axios from 'axios'
 import AddUpdate from './AddUpdate'
 import BasedOn from './BasedOn'
 
-const URL=process.env.REACT_APP_NODE_SERVER_URL
-
 const Home =()=>{
   const location=useLocation()
   const navigate=useNavigate()

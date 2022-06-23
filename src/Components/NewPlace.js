@@ -5,8 +5,6 @@ import { Navigate } from 'react-router-dom'
 import '../Styles/App.css'
 
 
-const URL=process.env.REACT_APP_NODE_SERVER_URL
-
 const Months=[
     {month:"January"},
     {month:"February"},
@@ -98,12 +96,12 @@ const NewPlaceDetails=()=>{
             formData.append('parentplace',details.parentplace)
         }
         formData.append('images',imageref.current.files[0])
-        const response=await axios.post(URL+"tovisit/admin/addPlace",formData,{headers:{
+        const response=await axios.post("https://tovisit-india-node-server.herokuapp.com/tovisit/admin/addPlace",formData,{headers:{
             'Content-Type':'application/x-www-form-urlencoded'
         }})
         const responseData=await response.data
         if(responseData.success){   
-            const imageresponse=await axios.post(URL+"tovisit/admin/uploadImage",formData,{headers:{
+            const imageresponse=await axios.post("https://tovisit-india-node-server.herokuapp.com/tovisit/admin/uploadImage",formData,{headers:{
                 'Content-Type':'application/x-www-form-urlencoded'
             }})
             const imageresponseData=await imageresponse.data
@@ -136,7 +134,7 @@ const NewPlaceDetails=()=>{
     }
 
     const getPlaces=async ()=>{
-        const response=await axios.get(URL+'tovisit/getplaces')
+        const response=await axios.get('https://tovisit-india-node-server.herokuapp.com/tovisit/getplaces')
         const responseData=await response.data
         if(responseData.length > 0){
             var temp=[]

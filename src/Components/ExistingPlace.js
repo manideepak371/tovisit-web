@@ -4,8 +4,6 @@ import { useEffect,useState,useRef } from "react"
 import { Alert } from "react-bootstrap"
 import '../Styles/App.css'
 
-const URL=process.env.REACT_APP_NODE_SERVER_URL
-
 var changearr={}
 
 const DetailsChange=(details,startmonth,endmonth,season,updatedImage)=>{
@@ -81,7 +79,7 @@ const ExistingPlaceDetails=()=>{
 
 
     const getPlaces=async ()=>{
-        const response=await axios.get(URL+'tovisit/getplaces')
+        const response=await axios.get('https://tovisit-india-node-server.herokuapp.com/tovisit/getplaces')
         const responseData=await response.data
         if(responseData.length > 0){
             var temp1=[]
@@ -106,7 +104,7 @@ const ExistingPlaceDetails=()=>{
     
     const getDetails=async ()=>{
         var selectedPlace={placename:place}
-        const response=await axios.post(URL+'tovisit/getdetails',selectedPlace)
+        const response=await axios.post('https://tovisit-india-node-server.herokuapp.com/tovisit/getdetails',selectedPlace)
         const responseData=await response.data
         if(responseData.length > 0){
             setDetails(responseData)
@@ -226,7 +224,7 @@ const PlaceDetails=(data)=>{
             formData.append('imagekey',details[0].images[0].key)
         }
         if(Object.keys(updateddetails).length > 0 || updatedImage){
-            const response=await axios.post(URL+'tovisit/admin/updatePlace',formData)
+            const response=await axios.post('https://tovisit-india-node-server.herokuapp.com/tovisit/admin/updatePlace',formData)
             const responseData=await response.data
             console.log(responseData)
             if(responseData.success){
