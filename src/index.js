@@ -30,8 +30,7 @@ const Menubar=()=>{
 axios.interceptors.request.use(
   request => {
     request.headers['Content-Type']="application/json";
-    request.headers['Access-Control-Allow-Origin']="http://localhost:3000"
-    request.withCredentials=true
+    request.headers['Access-Control-Allow-Origin']="https://tovisit-india-web.netlify.app/"
     return request
   },
   error => {
