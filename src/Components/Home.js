@@ -20,7 +20,7 @@ const Home =()=>{
   }
 
   const GetPlaces=async ()=>{
-    const response=await axios.get(URL+"tovisit")
+    const response=await axios.get("https://tovisit-india-node-server.herokuapp.com/tovisit/")
     const responseData=await response.data
     if(responseData?.message === "no data"){
       setPlaces([])
