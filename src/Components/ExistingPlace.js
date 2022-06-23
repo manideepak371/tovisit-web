@@ -4,7 +4,7 @@ import { useEffect,useState,useRef } from "react"
 import { Alert } from "react-bootstrap"
 import '../Styles/App.css'
 
-const DB_URL=process.env.REACT_APP_DB_URL
+const URL=process.env.REACT_APP_NODE_SERVER_URL
 
 var changearr={}
 
@@ -81,7 +81,7 @@ const ExistingPlaceDetails=()=>{
 
 
     const getPlaces=async ()=>{
-        const response=await axios.get(DB_URL+'getplaces')
+        const response=await axios.get(URL+'tovisit/getplaces')
         const responseData=await response.data
         if(responseData.length > 0){
             var temp1=[]
@@ -106,7 +106,7 @@ const ExistingPlaceDetails=()=>{
     
     const getDetails=async ()=>{
         var selectedPlace={placename:place}
-        const response=await axios.post(DB_URL+'getdetails',selectedPlace)
+        const response=await axios.post(URL+'tovisit/getdetails',selectedPlace)
         const responseData=await response.data
         if(responseData.length > 0){
             setDetails(responseData)
@@ -131,7 +131,8 @@ const ExistingPlaceDetails=()=>{
         }
         else{
             return(
-                <div style={{marginLeft:"30%",marginTop:"20%"}}>No Details found on this place</div>
+                // <div className="no-data-div">No Details found on this place</div>
+                null
             )
         }
     }
@@ -152,8 +153,9 @@ const ExistingPlaceDetails=()=>{
                                 <option className="select-options">{area}</option>
                             ))
                         } 
-                    </select>   : 
-                    <label>No places to list</label>}
+                    </select>   :
+                     <div className="no-data-div"><label>No places to list</label></div>
+                } 
             </div>
             <>
                 <DetailsAndImages/>
@@ -224,7 +226,7 @@ const PlaceDetails=(data)=>{
             formData.append('imagekey',details[0].images[0].key)
         }
         if(Object.keys(updateddetails).length > 0 || updatedImage){
-            const response=await axios.post(DB_URL+'admin/updatePlace',formData)
+            const response=await axios.post(URL+'tovisit/admin/updatePlace',formData)
             const responseData=await response.data
             console.log(responseData)
             if(responseData.success){

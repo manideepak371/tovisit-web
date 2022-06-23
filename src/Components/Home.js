@@ -5,6 +5,7 @@ import axios from 'axios'
 import AddUpdate from './AddUpdate'
 import BasedOn from './BasedOn'
 
+const URL=process.env.REACT_APP_NODE_SERVER_URL
 
 const Home =()=>{
   const location=useLocation()
@@ -19,9 +20,16 @@ const Home =()=>{
   }
 
   const GetPlaces=async ()=>{
-    const response=await axios.get("http://localhost:9000/")
+    const response=await axios.get(URL+"tovisit")
     const responseData=await response.data
-    setPlaces(responseData.data)
+    if(responseData?.message === "no data"){
+      setPlaces([])
+      return
+    }
+    if(responseData){
+      setPlaces(responseData.data)
+    }
+
   }
 
   useEffect(()=>{
@@ -52,15 +60,11 @@ const Home =()=>{
       </div>
       <div className='div-grid' id="div3">
         <div>
-          <BasedOn selectedBtn={btnSelected} data={places}/>
-          {/* {places?.length > 0  ? 
-            places.map((place,index) => (
-              <div className='based-on-divs' id={`place${index}`} onClick={()=>{showPlace(place.placename)}}>
-                <label className='home-place-div'>{place.placename}</label>
-              </div>
-            ))
-            :<div className='no-data-div'>No data available.</div>
-          } */}
+          {
+            places?.length > 0 ? 
+            <BasedOn selectedBtn={btnSelected} data={places}/> :
+            <div className='no-data-div'>No data available</div>
+          }
         </div>
       </div>
       <Outlet/>

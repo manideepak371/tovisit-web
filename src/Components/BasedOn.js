@@ -39,7 +39,7 @@ const BasedOn=({selectedBtn,data})=>{
         let currentMonth=Months[new Date().getMonth()]
         let currentMonthNumber=new Date().getMonth()
         let currentSeason=MatchSeasontoMonth[currentMonthNumber][0]
-        data.forEach(place => {
+        data?.forEach(place => {
             if(place.startmonth === Months[new Date().getMonth()] ){
                 a.push(place)
             }
