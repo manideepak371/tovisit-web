@@ -27,7 +27,6 @@ const Seasons=[
 ]
 
 const BasedOn=({selectedBtn,data})=>{
-
     const navigate=useNavigate()
     const placeChange=(place_name)=>{
         navigate(`place/${place_name}`,{replace:true})
@@ -40,7 +39,7 @@ const BasedOn=({selectedBtn,data})=>{
         let currentMonthNumber=new Date().getMonth()
         let currentSeason=MatchSeasontoMonth[currentMonthNumber][0]
         data?.forEach(place => {
-            if(place.startmonth === Months[new Date().getMonth()] ){
+            if(place.startmonth === Months[new Date().getMonth()] || place.endmonth === Months[new Date().getMonth()]){
                 a.push(place)
             }
         });
@@ -67,7 +66,7 @@ const BasedOn=({selectedBtn,data})=>{
         return (
             <>
                 <hr style={{color:"red",backgroundColor:"red",marginLeft:"5%",marginRight:"5%",height:"10px"}}></hr>
-                <label className='based-labels'>Based on City alphabetical order</label>
+                <label className='based-labels'>Based on City / Place name alphabetical order</label>
                 <div className='div-places'>
                     {
                         a.map((place)=>(
@@ -149,6 +148,7 @@ const BasedOn=({selectedBtn,data})=>{
             {mon:"February",places:[]},
             {mon:"March",places:[]},
             {mon:"April",places:[]},
+            {mon:"May",places:[]},
             {mon:"June",places:[]},
             {mon:"July",places:[]},
             {mon:"August",places:[]},
@@ -166,7 +166,6 @@ const BasedOn=({selectedBtn,data})=>{
             });
         });
 
-        console.log(a)
         return(
             <>
 

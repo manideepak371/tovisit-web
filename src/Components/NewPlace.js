@@ -4,7 +4,6 @@ import { Alert } from 'react-bootstrap'
 import { Navigate } from 'react-router-dom'
 import '../Styles/App.css'
 
-
 const Months=[
     {month:"January"},
     {month:"February"},
@@ -101,28 +100,19 @@ const NewPlaceDetails=()=>{
         }})
         const responseData=await response.data
         if(responseData.success){   
-            const imageresponse=await axios.post("https://tovisit-india-node-server.herokuapp.com/tovisit/admin/uploadImage",formData,{headers:{
-                'Content-Type':'application/x-www-form-urlencoded'
-            }})
-            const imageresponseData=await imageresponse.data
-            if(imageresponseData.success){
-                setSuccess(true)
-                setSuccessMsg(imageresponseData.message)
-                console.log(responseData.message)
-                console.log(imageresponseData.message)
-                console.log(responseData)
-                console.log(imageresponseData)
-                setTimeout(()=>{
-                    setReload(true)
-                },1000)
-            }
-            if(!imageresponseData.success){
-                setSuccess(false)
-                setError(true)
-                setSuccessMsg("")
-                setErrMsg(imageresponseData.message)
-                return                                
-            }
+            // const imageresponse=await axios.post(DB_URL+"/tovisit/admin/uploadImage",formData,{headers:{
+            //     'Content-Type':'application/x-www-form-urlencoded'
+            // }})
+            // const imageresponseData=await imageresponse.data
+            setSuccess(true)
+            setError(false)
+            setErrMsg("")
+            setSuccessMsg(responseData.message)
+            console.log(responseData.message)
+            console.log(responseData)
+            setTimeout(()=>{
+                setReload(true)
+            },1000)
         }
         if(!responseData.success){
             setSuccess(false)
@@ -131,6 +121,24 @@ const NewPlaceDetails=()=>{
             setErrMsg(responseData.message)
             return
         }
+            // if(imageresponseData.success){
+            //     setSuccess(true)
+            //     setSuccessMsg(imageresponseData.message)
+            //     console.log(responseData.message)
+            //     console.log(imageresponseData.message)
+            //     console.log(responseData)
+            //     console.log(imageresponseData)
+            //     setTimeout(()=>{
+            //         setReload(true)
+            //     },1000)
+            // }
+            // if(!imageresponseData.success){
+            //     setSuccess(false)
+            //     setError(true)
+            //     setSuccessMsg("")
+            //     setErrMsg(imageresponseData.message)
+            //     return                                
+            // }
     }
 
     const getPlaces=async ()=>{

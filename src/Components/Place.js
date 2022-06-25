@@ -14,18 +14,6 @@ function Place(){
     const [placeDetails,setDetails]=useState({})
     const [slide,setSlide]=useState(0)
     const place_name=params?.place_name.replace('%20',' ')
-    const d=[
-        {id:0},
-        {id:1},
-        {id:2},
-        {id:3},
-        {id:4},
-        {id:5},
-        {id:6},
-        {id:7},
-        {id:8},
-        {id:9}    
-    ]
 
     useEffect(()=>{
         if(place_name){
@@ -49,7 +37,7 @@ function Place(){
     }
 
     return (
-        <div className={placeDiv}>
+        <div className="">
             <div className="place-div">
                 <div className="place-div-flex">
                     {
@@ -70,11 +58,11 @@ function Place(){
                         </div>
                     }
                 </div>
-                <div className='place-div-flex'>
+                {/* <div className='place-div-flex'>
                     <div className="image-styles">
                         <img className='place-img' style={{width:"100%",height:"500px",borderRadius:"25PX"}} src={data[0]?.images[0]?.imagelink} className='place-img' alt='Place Image'/>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="div-grid">
                 {

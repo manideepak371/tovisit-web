@@ -30,7 +30,7 @@ const Menubar=()=>{
 axios.interceptors.request.use(
   request => {
     request.headers['Content-Type']="application/json";
-    request.headers['Access-Control-Allow-Origin']="*"
+    request.headers['Access-Control-Allow-Origin']="https://tovisit-india-node-server.herokuapp.com" || "http://localhost:9000"
     return request
   },
   error => {

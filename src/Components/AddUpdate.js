@@ -19,7 +19,7 @@ function AddUpdate(){
             <>
                 <span className="new-existing-radio">
                     <input type="radio" name="newoldplace" value="New Place" id="new-place-radio" onChange={()=>{setNewExisting(true)}} checked={newExisting}/>
-                    <label > New Place</label>
+                    <label > Add New Place</label>
                 </span>
                 <span className="new-existing-radio">
                     <input type="radio" name="newoldplace" value="Existing Places" id="existing-place-radio" onChange={()=>{setNewExisting(false)}} checked={!newExisting}/>

@@ -26,7 +26,7 @@ const DetailsChange=(details,startmonth,endmonth,season,updatedImage)=>{
 
 const Months=[
     {month:"January"},
-    {month:"Feb"},
+    {month:"February"},
     {month:"March"},
     {month:"April"},
     {month:"May"},
@@ -141,7 +141,9 @@ const ExistingPlaceDetails=()=>{
                 {places.length > 0 ? 
                     <select className="places-areas-dropdown" ref={placesdropdownref} onChange={()=>{PlaceChange()}}>
                         <option style={{backgroundColor:"antiquewhite",color:"darkgrey",width:"100%"}} disabled>Places</option>
-                        {places.map((place) => (
+                        {places.sort((a,b)=>(
+                            b.placename > a.placename ? -1 : 1
+                        )).map((place) => (
                             <option className="select-options">{place.placename}</option>
                         ))}
                         <option style={{backgroundColor:"antiquewhite",color:"darkgrey",width:"100%"}} disabled>Areas</option>
@@ -221,9 +223,9 @@ const PlaceDetails=(data)=>{
         }
         if(updatedImage !== undefined){
             formData.append('images',updatedImage)
-            formData.append('imagekey',details[0].images[0].key)
+            formData.append('imagekey',details[0]?.images[0].key)
         }
-        if(Object.keys(updateddetails).length > 0 || updatedImage){
+        if(Object.keys(updateddetails).length > 0 || updatedImage !== undefined){
             const response=await axios.post('https://tovisit-india-node-server.herokuapp.com/tovisit/admin/updatePlace',formData)
             const responseData=await response.data
             console.log(responseData)
@@ -322,10 +324,10 @@ const PlaceDetails=(data)=>{
                 <label className="place-attributes">Is Area ?</label> <input type="radio" className="place-value-radio" name="placeORarea" checked={details[0]?.isArea} readOnly/>
             </p>
             <TextAreaDisplayed/>
-            <div className="admin-div-image-show">
+            {/* <div className="admin-div-image-show">
                 <img style={{width:"100%",marginTop:"10px"}} src="{details[0]?.images[0]?.imagelink}" alt="No image found"/>
                 <p style={{textAlign:"center"}}><label className="place-attributes">Replace Image :</label> <input type="file" accept="image/*,.jpg,.png" onChange={(event)=>{UpdatedImage(event.target)}} /></p>
-            </div>
+            </div> */}
             {error && <Alert variant="danger" onClose={()=>{setError(false)}} dismissible={true}>{errorMessage}</Alert>}
             {success && <Alert variant="success" onClose={()=>{setSuccess(false)}} dismissible={true}>{successMessage}</Alert>}
             <div className="admin-save-delete-btn">
@@ -334,7 +336,7 @@ const PlaceDetails=(data)=>{
                     <button className="sign-btn" id="delete-btn" disabled>Delete Place</button>
                 </p>
             </div>
-            {reload && <Navigate to='/addupdate' replace={true} />}
+            {reload && window.location.reload() }
         </div>
     )
 }
