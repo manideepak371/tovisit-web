@@ -178,12 +178,12 @@ const BasedOn=({selectedBtn,data})=>{
                                 <>  
                                     <hr style={{color:"red",backgroundColor:"red",marginLeft:"5%",marginRight:"5%",height:"10px"}}></hr>
                                     <label className='based-labels'>{month.mon}</label>
-                                    {
-                                        month.places.map(place => (
-                                            <div className='div-places'>
+                                    <div className='div-places'>
+                                        {
+                                            month.places.map(place => (
                                                 <div className='based-on-divs'><label className='home-place-div' onClick={()=>{placeChange(place.placename)}}>{place.placename}</label></div>
-                                            </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </>
                             }
                         </>
